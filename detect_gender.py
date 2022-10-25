@@ -39,15 +39,9 @@ genderList=['Male','Female']
 faceNet=cv2.dnn.readNet(faceModel,faceProto)
 ageNet=cv2.dnn.readNet(ageModel,ageProto)
 genderNet=cv2.dnn.readNet(genderModel,genderProto)
+padding=20
 
-def detect_gender(image):
-    video=cv2.VideoCapture(image)
-    padding=20
-    hasFrame,frame=video.read()
-    if not hasFrame:
-        cv2.waitKey()
-        return None, None
-    
+def detect_gender(frame):
     resultImg,faceBoxes=highlightFace(faceNet,frame)
     if not faceBoxes:
         print("No face detected")
