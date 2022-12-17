@@ -43,12 +43,12 @@ genderNet=cv2.dnn.readNet(genderModel,genderProto)
 padding=20
 
 def detect_gender(frame):
-    resultImg,faceBoxes=highlightFace(faceNet,frame)
-    if not faceBoxes:
-        print("No face detected")
-        return None, None
-
     try:
+        resultImg, faceBoxes=highlightFace(faceNet,frame)
+        if not faceBoxes:
+            print("No face detected")
+            return None, None
+
         for faceBox in faceBoxes:
             face=frame[max(0,faceBox[1]-padding):
                     min(faceBox[3]+padding,frame.shape[0]-1),max(0,faceBox[0]-padding)
